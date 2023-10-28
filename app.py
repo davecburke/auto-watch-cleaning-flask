@@ -8,6 +8,7 @@ from cleaning import Cleaning
 app = Flask(__name__)
 # CORS(app, resources={r'/*': {'origins': '*'}})
 app_config = Config('app.config')
+print(app_config.dry_cycle.dry.motor_setting.speed)
 app_printer = Printer();
 app_cleaning = Cleaning()
 def startCleaningProcess():

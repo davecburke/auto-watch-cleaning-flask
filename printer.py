@@ -29,11 +29,11 @@ class Printer():
     def home_printer(self):
         return self.app_moonraker_util.send_gcode('G28')
 
-    def motor_controller_power_on(self):
-        return self.app_moonraker_util.send_gcode('M106 S255')
+    # def motor_controller_power_on(self):
+    #     return self.app_moonraker_util.send_gcode('M106 S255')
     
-    def motor_controller_power_off(self):
-        return self.app_moonraker_util.send_gcode('M107')
+    # def motor_controller_power_off(self):
+    #     return self.app_moonraker_util.send_gcode('M107')
     
     def move_to(self, x=None, y=None, z=None):
         co_ords = ''

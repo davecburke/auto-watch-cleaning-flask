@@ -6,9 +6,10 @@ class Config():
         self.config_file.read(config_file_path, 'utf-8')
         self.moonraker_ip = self.config_file['moonraker']['ip_address']
         self.pause_after_move = int(self.config_file['general']['pause_after_move'])
-        self.clean_cycle = self.Cycle(self.config_file['clean_cycle'], self.config_file['clean_cycle_wash'],self.config_file['clean_cycle_expel'])
-        self.rinse_cycle_1 = self.Cycle(self.config_file['rinse_cycle_1'], self.config_file['rinse_cycle_1_wash'],self.config_file['rinse_cycle_1_expel'])
-        self.rinse_cycle_2 = self.Cycle(self.config_file['rinse_cycle_2'], self.config_file['rinse_cycle_2_wash'],self.config_file['rinse_cycle_2_expel'])
+        self.clean_cycle = self.Clean_Cycle(self.config_file['clean_cycle'], self.config_file['clean_cycle_wash'],self.config_file['clean_cycle_expel'])
+        self.rinse_cycle_1 = self.Clean_Cycle(self.config_file['rinse_cycle_1'], self.config_file['rinse_cycle_1_wash'],self.config_file['rinse_cycle_1_expel'])
+        self.rinse_cycle_2 = self.Clean_Cycle(self.config_file['rinse_cycle_2'], self.config_file['rinse_cycle_2_wash'],self.config_file['rinse_cycle_2_expel'])
+        self.dry_cycle = self.Dry_Cycle(self.config_file['dry_cycle'], self.config_file['dry_cycle_spin'])
         
     def motor_control_input_1(self):
         return int(self.config_file['motor_gpio_pins']['motor_control_input_1'])
@@ -19,11 +20,21 @@ class Config():
     def motor_enable(self):
         return int(self.config_file['motor_gpio_pins']['motor_enable'])
     
+    def heater_fan_control_input_1(self):
+        return int(self.config_file['heater_gpio_pins']['heater_fan_control_input_1'])
+    
+    def heater_fan_control_input_2(self):
+        return int(self.config_file['heater_gpio_pins']['heater_fan_control_input_2'])
+    
+    def heater_fan_enable(self):
+        return int(self.config_file['heater_gpio_pins']['heater_fan_enable'])
+    
+    def heater_element(self):
+        return int(self.config_file['heater_gpio_pins']['heater_element'])
+    
     class Cycle:
-        def __init__(self, cycle, cycle_wash, cycle_expel):
+        def __init__(self, cycle):
             self.receptacle = self.Receptacle(cycle)
-            self.wash = self.Cycle_Stage(cycle_wash)
-            self.expel = self.Cycle_Stage(cycle_expel)
         class Receptacle:
             def __init__(self, cycle):
                 self.location_x = int(cycle['receptacle_location_x'])
@@ -111,4 +122,16 @@ class Config():
                 
                 @speed.setter
                 def speed(self, value):
-                    self._speed = float(value)    
+                    self._speed = float(value)
+
+    class Clean_Cycle(Cycle):
+        def __init__(self, cycle, cycle_wash, cycle_expel):
+            super().__init__(cycle)
+            self.wash = self.Cycle_Stage(cycle_wash)
+            self.expel = self.Cycle_Stage(cycle_expel)
+
+    class Dry_Cycle(Cycle):
+        def __init__(self, cycle, cycle_dry):
+            super().__init__(cycle)
+            self.dry = self.Cycle_Stage(cycle_dry)
+
