@@ -16,18 +16,38 @@ class Heater():
         # self.pi_pwm = GPIO.PWM(en,1000)
         # self.pi_pwm.start(0)
     
-    def on(self):
+    def heater_on(self):
         print('heater on')
+        print(self.in1)
+        print(self.en)
+        # GPIO.output(self.in1, True)
+        # GPIO.output(self.in2, False)
+        # GPIO.output(self.en, True)
+        GPIO.output(self.element, True)
+
+    def heater_off(self):
+        print('heater off')
+        # GPIO.output(self.in1, False)
+        # GPIO.output(self.in2, False)
+        # GPIO.output(self.en, False)
+        GPIO.output(self.element, False)
+
+    def fan_on(self):
+        print('fan on')
         print(self.in1)
         print(self.en)
         GPIO.output(self.in1, True)
         GPIO.output(self.in2, False)
         GPIO.output(self.en, True)
-        GPIO.output(self.element, True)
+        # GPIO.output(self.element, True)
 
-    def off(self):
-        print('heater off')
+    def fan_off(self):
+        print('fan off')
         GPIO.output(self.in1, False)
         GPIO.output(self.in2, False)
         GPIO.output(self.en, False)
-        GPIO.output(self.element, False)
+        # GPIO.output(self.element, False)    
+
+    def clean_up(self):
+        print('clean up - motor')
+        GPIO.cleanup()        

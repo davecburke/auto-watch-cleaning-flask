@@ -10,6 +10,7 @@ class Config():
         self.rinse_cycle_1 = self.Clean_Cycle(self.config_file['rinse_cycle_1'], self.config_file['rinse_cycle_1_wash'],self.config_file['rinse_cycle_1_expel'])
         self.rinse_cycle_2 = self.Clean_Cycle(self.config_file['rinse_cycle_2'], self.config_file['rinse_cycle_2_wash'],self.config_file['rinse_cycle_2_expel'])
         self.dry_cycle = self.Dry_Cycle(self.config_file['dry_cycle'], self.config_file['dry_cycle_spin'])
+        self.heater_cool_down_duration = int(self.config_file['general']['heater_cool_down_duration'])
         
     def motor_control_input_1(self):
         return int(self.config_file['motor_gpio_pins']['motor_control_input_1'])
