@@ -153,6 +153,10 @@ class Cleaning():
         move_and_pause = self.app_printer.complete_move_and_pause()
         if(not(move_and_pause)):
             return False
+        self.app_printer.move_to(None, None, receptacle_co_ords.location_expel_z + receptacle_co_ords.receptacle_clearance)
+        move_and_pause = self.app_printer.complete_move_and_pause()
+        if(not(move_and_pause)):
+            return False
         self.app_heater.heater_off()
         #Tidy up
         self.app_printer.home_printer()
