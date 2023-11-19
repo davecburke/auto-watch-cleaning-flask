@@ -1,5 +1,7 @@
 # auto-watch-cleaning-flask
 
+![AWC](static/images/AWC.jpg "Auto Watch Cleaning Machine")
+
 Watch cleaning machines make the cleaning of mechanical watches both convenient and very effective but they can be expensive with most manual machines starting at around $1000 AUD and automatic machines starting at around $8,000 AUD. This is a big expense for a hobbiest like me.
 
 It dawned on me that a 3D printer could be converted into a watch cleaning machine by replacing the hotend on the X axis with a spinning motor. How hard could it be, right!
